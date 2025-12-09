@@ -1,8 +1,12 @@
-export default function Status({turn, winner}) {
+export default function Status({ turn, winner, value }) {
+  let message;
 
-    return(
-        <div className="status">
-            {winner===null ? turn ? 'Next Player: X' : 'Next Player: O' : '🎉 Winner: ' + winner + ' 🎉'}
-        </div>
-    )
+  if (winner) {
+    message = `🎉 Winner: ${winner} 🎉`;
+  } else if (value.every((cell) => cell !== null)) {
+    message = "It's a draw!";
+  } else {
+    message = `Next Player: ${turn ? "X" : "O"}`;
+  }
+  return <div className="status">{message}</div>;
 }

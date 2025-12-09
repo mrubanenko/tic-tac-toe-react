@@ -4,17 +4,17 @@ import ResetButton from "./ResetButton";
 import useGameLogic from "../useGameLogic";
 
 export default function Board() {
+  const { value, turn, winner, handleClick, resetGame } = useGameLogic();
 
-    const { value, turn, winner, handleClick, resetGame } = useGameLogic();
-
-    return(
+  return (
     <div className="board-container">
-        <Status turn={turn} winner={winner}/>
-        <div className="board">
-            {value.map((num, index) => (
-            <Square key={index} onClick={() => handleClick(index)} value={num}/>
+      <Status turn={turn} winner={winner} value={value} />
+      <div className="board">
+        {value.map((cell, i) => (
+          <Square key={i} onClick={() => handleClick(i)} value={cell} />
         ))}
-        </div>
-        <ResetButton className='reset-button' onReset={resetGame} />
-    </div> )
+      </div>
+      <ResetButton className="reset-button" onReset={resetGame} />
+    </div>
+  );
 }
