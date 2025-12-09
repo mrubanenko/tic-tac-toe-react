@@ -11,7 +11,12 @@ export default function Board() {
       <Status turn={turn} winner={winner} value={value} />
       <div className="board">
         {value.map((cell, i) => (
-          <Square key={i} onClick={() => handleClick(i)} value={cell} />
+          <Square
+            key={i}
+            onClick={() => handleClick(i)}
+            value={cell}
+            turn={turn}
+          />
         ))}
       </div>
       <ResetButton className="reset-button" onReset={resetGame} />
