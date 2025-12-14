@@ -43,6 +43,25 @@ body {
   font-size: 16px;
 }
 
+.history {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 8px;
+  margin-top: 8px;
+  min-height: 30px;
+}
+
+.history button {
+  padding: 4px 12px;
+  background-color: #d6dbe4ff;
+  color: rgb(2, 2, 2);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
 button:active {
   transform: translateY(1px);
 }
