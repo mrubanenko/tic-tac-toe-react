@@ -1,6 +1,13 @@
 import { useState } from "react";
+import type { Cell } from "../useGameLogic.js";
 
-export default function Square({ value, onClick, turn }) {
+type SquareProps = {
+  value: Cell;
+  onClick: () => void;
+  turn: boolean;
+}
+
+export default function Square({ value, onClick, turn }: SquareProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isShaking, setIsShaking] = useState(false);
 

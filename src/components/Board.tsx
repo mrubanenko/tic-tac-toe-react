@@ -1,7 +1,7 @@
-import Square from "./Square";
-import Status from "./Status";
-import ResetButton from "./ResetButton";
-import useGameLogic from "../useGameLogic";
+import Square from "./Square.js";
+import Status from "./Status.js";
+import ResetButton from "./ResetButton.js";
+import useGameLogic from "../useGameLogic.js";
 
 export default function Board() {
   const { value, turn, winner, handleClick, resetGame, history, goToStep } =

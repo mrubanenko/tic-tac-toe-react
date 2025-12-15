@@ -1,12 +1,13 @@
 import { useState } from "react";
+export type Cell = "X" | "O" | null;
 
 export default function useGameLogic() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [history, setHistory] = useState<Cell[][]>([Array(9).fill(null)]);
   const [step, setStep] = useState(0);
   const [turn, setTurn] = useState(true);
-  const [winner, setWinner] = useState(null);
+  const [winner, setWinner] = useState<Cell>(null);
 
-  const winCombos = [
+  const winCombos: [number, number, number][] = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -17,9 +18,9 @@ export default function useGameLogic() {
     [2, 4, 6],
   ];
 
-  const value = history[step];
+  const value = history[step]!;
 
-  function checkWinner(cells) {
+  function checkWinner(cells: Cell[]) {
     for (let combo of winCombos) {
       const [i, j, k] = combo;
       if (cells[i] && cells[i] === cells[j] && cells[i] === cells[k]) {
@@ -29,7 +30,7 @@ export default function useGameLogic() {
     return null;
   }
 
-  function handleClick(index) {
+  function handleClick(index: number) {
     if (winner || value[index]) return;
 
     const copy = [...value];
@@ -44,11 +45,11 @@ export default function useGameLogic() {
     setWinner(checkWinner(copy));
   }
 
-  function goToStep(newStep) {
+  function goToStep(newStep: number) {
     if (newStep < 0 || newStep >= history.length) return;
     setStep(newStep);
     setTurn(newStep % 2 === 0);
-    setWinner(checkWinner(history[newStep]));
+    setWinner(checkWinner(history[newStep]!));
   }
 
   function resetGame() {
@@ -58,5 +59,13 @@ export default function useGameLogic() {
     setWinner(null);
   }
 
-  return { value, turn, winner, handleClick, resetGame, history, goToStep };
+  return {
+    value,
+    turn,
+    winner,
+    handleClick,
+    resetGame,
+    history,
+    goToStep,
+  } as const;
 }

@@ -1,5 +1,13 @@
-export default function Status({ turn, winner, value }) {
-  let message;
+import type { Cell } from "../useGameLogic.js";
+
+type StatusProps = {
+  turn: boolean,
+  winner: Cell,
+  value: Cell[],
+}
+
+export default function Status({ turn, winner, value }: StatusProps) {
+  let message: string;
 
   if (winner) {
     message = `🎉 Winner: ${winner} 🎉`;
